@@ -1,0 +1,11 @@
+Order ID: 7 
+State: Collected
+OrderedDateTime: 2025-11-25 17:19:05 
+ProgressingDateTime: 2025-11-25 18:38:40
+CollectedDateTime: 2025-11-25 18:47:39
+Items:
+ 0004    Watch              ( 1) £  29.99
+ 0004    Watch              ( 1) £  29.99
+--------------------------------------------
+ Total                               £  59.98
+
