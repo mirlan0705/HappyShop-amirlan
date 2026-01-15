@@ -35,44 +35,56 @@ public final class UIStyle {
     }
 
     public static final int customerWinWidth = 850;
-    public static final int customerWinHeight = 340;
+    public static final int customerWinHeight = 320;
     public static final int removeProNotifierWinWidth = customerWinWidth / 2 + 160;
     public static final int removeProNotifierWinHeight = 230;
 
-    // ===== Login window size =====
-    public static final int loginWinWidth = 520;
-    public static final int loginWinHeight = 420;
+    // ===== Login window size (compact, matches other clients) =====
+    public static final int loginWinWidth = 430;
+    public static final int loginWinHeight = 280;
 
-    // ===== Login styles (Argos-like) =====
-    public static final String loginTitleStyle =
-            "-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;";
-
-    public static final String loginSubTitleStyle =
-            "-fx-font-size: 13px; -fx-text-fill: #666;";
+    // ===== Compact Login styles =====
+    public static final String loginRootStyle =
+            "-fx-background-color: #f5f5f5; -fx-padding: 18px;";
 
     public static final String loginCardStyle =
             "-fx-background-color: white;" +
-                    "-fx-background-radius: 16;" +
-                    "-fx-padding: 24px;" +
-                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 18, 0, 0, 6);";
+                    "-fx-background-radius: 14;" +
+                    "-fx-padding: 18px;" +
+                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 14, 0, 0, 5);";
+
+    public static final String loginTitleStyle =
+            "-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1a1a1a;";
+
+    public static final String loginSubTitleStyle =
+            "-fx-font-size: 12px; -fx-text-fill: #666;";
 
     public static final String loginInputStyle =
             "-fx-background-radius: 10;" +
                     "-fx-border-radius: 10;" +
                     "-fx-border-color: #d0d0d0;" +
-                    "-fx-padding: 10 12;" +
-                    "-fx-font-size: 14px;";
+                    "-fx-padding: 8 10;" +
+                    "-fx-font-size: 13px;";
 
     public static final String loginPrimaryBtnStyle =
             "-fx-background-radius: 10;" +
-                    "-fx-font-size: 14px;" +
+                    "-fx-font-size: 13px;" +
                     "-fx-font-weight: bold;" +
-                    "-fx-padding: 10 0;";
+                    "-fx-padding: 8 0;";
+
+    public static final String loginSecondaryBtnStyle =
+            "-fx-background-color: #eeeeee;" +
+                    "-fx-background-radius: 10;" +
+                    "-fx-font-size: 13px;" +
+                    "-fx-font-weight: bold;" +
+                    "-fx-padding: 8 0;";
 
     public static final String loginLinkBtnStyle =
             "-fx-background-color: transparent;" +
                     "-fx-underline: true;" +
-                    "-fx-text-fill: #0b57d0;";
+                    "-fx-text-fill: #0b57d0;" +
+                    "-fx-font-size: 12px;";
+
 
 
     public static final int pickerWinWidth = 310;

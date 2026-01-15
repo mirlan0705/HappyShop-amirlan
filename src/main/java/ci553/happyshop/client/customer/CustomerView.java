@@ -52,7 +52,15 @@ public class CustomerView  {
     // (e.g., positioning the removeProductNotifier when needed).
     private Stage viewWindow;
 
+    public Stage getStage() {
+        return viewWindow;
+    }
+    public boolean isReady() {
+        return viewWindow != null && lbUser != null;
+    }
+
     public void start(Stage window) {
+
         VBox vbSearchPage = createSearchPage();
         vbTrolleyPage = CreateTrolleyPage();
         vbReceiptPage = createReceiptPage();
@@ -72,9 +80,13 @@ public class CustomerView  {
         Scene scene = new Scene(hbRoot, WIDTH, HEIGHT);
         window.setScene(scene);
         window.setTitle("🛒 HappyShop Customer Client");
-        //WinPosManager.registerWindow(window,WIDTH,HEIGHT); //calculate position x and y for this window
+        WinPosManager.registerWindow(window,WIDTH,HEIGHT); //calculate position x and y for this window
         window.show();
         viewWindow=window;// Sets viewWindow to this window for future reference and management.
+
+        // force an initial render of whatever username is currently in the model
+        cusController.cusModel.updateView();
+
     }
 
     private VBox createSearchPage() {
@@ -85,7 +97,6 @@ public class CustomerView  {
         HBox hbTop = new HBox(10, laPageTitle, lbUser);
         hbTop.setAlignment(Pos.CENTER_LEFT);
         hbTop.setSpacing(20);
-
 
         Label laId = new Label("ID:      ");
         laId.setStyle(UIStyle.labelStyle);
@@ -113,12 +124,12 @@ public class CustomerView  {
         ivProduct = new ImageView("imageHolder.jpg");
         ivProduct.setFitHeight(60);
         ivProduct.setFitWidth(60);
-        ivProduct.setPreserveRatio(true); // Image keeps its original shape and fits inside 60×60
+        ivProduct.setPreserveRatio(true); // image keeps its original shape and fits inside 60×60
         ivProduct.setSmooth(true); //make it smooth and nice-looking
 
         lbProductInfo = new Label("Thank you for shopping with us.");
         lbProductInfo.setWrapText(true);
-        lbProductInfo.setMinHeight(Label.USE_PREF_SIZE);  // Allow auto-resize
+        lbProductInfo.setMinHeight(Label.USE_PREF_SIZE);  // allow auto-resize
         lbProductInfo.setStyle(UIStyle.labelMulLineStyle);
         HBox hbSearchResult = new HBox(5, ivProduct, lbProductInfo);
         hbSearchResult.setAlignment(Pos.CENTER_LEFT);

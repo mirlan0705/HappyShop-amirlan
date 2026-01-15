@@ -14,6 +14,8 @@ import java.sql.SQLException;
 public class LoginModel {
     public DatabaseRW databaseRW;
     public LoginView loginView;
+    public CustomerModel customerModel;
+
 
 
     public LoginModel(DatabaseRW databaseRW) {
@@ -24,22 +26,24 @@ public class LoginModel {
 
         boolean valid = databaseRW.checkUser(email, password);
 
-        if (valid) {
-            // 1️⃣ close login window
-            loginView.closeWindow();
-
-            // 2️⃣ open customer client
-            launchCustomerClient(email);
-
-
-
-        } else {
-            // 3️⃣ show error
+        if (!valid) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Login failed");
             alert.setHeaderText(null);
             alert.setContentText("Invalid email or password");
             alert.showAndWait();
+            return;
+        }
+
+        // ✅ SUCCESS
+        if (customerModel != null) {
+            // popup login
+            customerModel.setUsername(email);   // updates label immediately
+            loginView.closeWindow();
+        } else {
+            // startup login
+            loginView.closeWindow();
+            launchCustomerClient(email);
         }
     }
 
@@ -97,7 +101,7 @@ public class LoginModel {
         CustomerView cusView = new CustomerView();
         CustomerController cusController = new CustomerController();
         CustomerModel cusModel = new CustomerModel();
-        cusModel.username = username;
+        cusModel.setUsername(username);
 
 
         cusView.cusController = cusController;

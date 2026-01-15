@@ -31,48 +31,62 @@ public class LoginView {
 
 
     public void start(Stage window) {
-        emailField = new TextField();
-        emailField.setPromptText("Email");
-        emailField.setStyle(UIStyle.loginInputStyle);
-        emailField.setPrefHeight(40);
 
-        passwordField = new PasswordField();
-        passwordField.setPromptText("Password");
-        passwordField.setStyle(UIStyle.loginInputStyle);
-        passwordField.setPrefHeight(40);
-
-
-        root = new VBox(14);
+        root = new VBox(12);
         root.setAlignment(Pos.CENTER);
-        root.setStyle("-fx-background-color: #f5f5f5; -fx-padding: 30px;");
+        root.setStyle(UIStyle.loginRootStyle);
 
-        VBox card = new VBox(12);
-        card.setAlignment(Pos.CENTER_LEFT);
+        VBox card = new VBox(10);
+        card.setAlignment(Pos.TOP_LEFT);
         card.setStyle(UIStyle.loginCardStyle);
-        card.setPrefWidth(360);
+
+        // Make the card fill most of the window width nicely
+        double cardW = UIStyle.loginWinWidth - 36; // root padding ~18*2
+        card.setPrefWidth(cardW);
 
         Label titleLabel = new Label("Sign in");
         titleLabel.setStyle(UIStyle.loginTitleStyle);
 
-        Button btnGuest = new Button("Continue as Guest");
-        btnGuest.setStyle(UIStyle.loginLinkBtnStyle);
-        btnGuest.setOnAction(this::buttonClicked);
-
         Label subTitle = new Label("Sign in for faster checkout and order tracking.");
         subTitle.setStyle(UIStyle.loginSubTitleStyle);
         subTitle.setWrapText(true);
+        subTitle.setMaxWidth(cardW - 10);
+
+        emailField = new TextField();
+        emailField.setPromptText("Email");
+        emailField.setStyle(UIStyle.loginInputStyle);
+        emailField.setPrefHeight(34);
+
+        passwordField = new PasswordField();
+        passwordField.setPromptText("Password");
+        passwordField.setStyle(UIStyle.loginInputStyle);
+        passwordField.setPrefHeight(34);
 
         Button btnSignIn = new Button("Sign In");
         btnSignIn.setStyle(UIStyle.loginPrimaryBtnStyle);
-        btnSignIn.setPrefWidth(360);
-        btnSignIn.setPrefHeight(42);
+        btnSignIn.setPrefHeight(34);
+        btnSignIn.setPrefWidth((cardW - 10) * 0.55);
         btnSignIn.setOnAction(this::buttonClicked);
+
+        Button btnGuest = new Button("Continue as Guest");
+        btnGuest.setStyle(UIStyle.loginSecondaryBtnStyle);
+        btnGuest.setPrefHeight(34);
+        btnGuest.setPrefWidth((cardW - 10) * 0.45);
+        btnGuest.setOnAction(this::buttonClicked);
+
+        HBox actionsRow = new HBox(10, btnSignIn, btnGuest);
+        actionsRow.setAlignment(Pos.CENTER_LEFT);
 
         Button btnSignUp = new Button("Create an account");
         btnSignUp.setStyle(UIStyle.loginLinkBtnStyle);
         btnSignUp.setOnAction(this::buttonClicked);
 
-        card.getChildren().addAll(titleLabel, subTitle, emailField, passwordField, btnSignIn, btnGuest, btnSignUp);
+        // spacing before link so it doesn't stick to buttons
+        VBox linkBox = new VBox(2, btnSignUp);
+        linkBox.setAlignment(Pos.CENTER_LEFT);
+
+        card.getChildren().addAll(titleLabel, subTitle, emailField, passwordField, actionsRow, linkBox);
+
         root.getChildren().add(card);
 
         Scene scene = new Scene(root, WIDTH, HEIGHT);
@@ -83,6 +97,7 @@ public class LoginView {
         window.show();
     }
 
+
     private void buttonClicked(ActionEvent event) {
         sounds.SoundPlayer.playClick();
 
@@ -90,11 +105,12 @@ public class LoginView {
         String action = btn.getText();
 
         try {
-            handleAction(action); // controller logic moved into its own method
-        } catch (SQLException e) {
-            e.printStackTrace();
+            handleAction(action);
+        } catch (Exception e) {
+            e.printStackTrace(); // so you SEE the real error in console
         }
     }
+
     private void handleAction(String action) throws SQLException {
         switch (action) {
             case "Sign In":

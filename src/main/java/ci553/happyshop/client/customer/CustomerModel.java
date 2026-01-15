@@ -22,7 +22,13 @@ import java.util.concurrent.TimeUnit;
  * or create a subclass of CustomerModel and override specific methods where appropriate.
  */
 public class CustomerModel {
-    public String username;   // or email
+    private String username = "Guest";
+
+    public void setUsername(String username) {
+        this.username = username;
+        updateView(); //immediate UI refresh
+    }
+
     public CustomerView cusView;
     public DatabaseRW databaseRW; //Interface type, not specific implementation
                                   //Benefits: Flexibility: Easily change the database implementation.
@@ -186,21 +192,21 @@ public class CustomerModel {
     }
 
     void updateView() {
-        if(theProduct != null){
+        if (cusView == null) return;
+
+        if (theProduct != null) {
             imageName = theProduct.getProductImageName();
-            String relativeImageUrl = StorageLocation.imageFolder +imageName; //relative file path, eg images/0001.jpg
-            // Get the full absolute path to the image
+            String relativeImageUrl = StorageLocation.imageFolder + imageName;
             Path imageFullPath = Paths.get(relativeImageUrl).toAbsolutePath();
-            imageName = imageFullPath.toUri().toString(); //get the image full Uri then convert to String
-            System.out.println("Image absolute path: " + imageFullPath); // Debugging to ensure path is correct
-        }
-        else{
+            imageName = imageFullPath.toUri().toString();
+        } else {
             imageName = "imageHolder.jpg";
         }
-        cusView.update(imageName, displayLaSearchResult, displayTaTrolley, displayTaReceipt, username);
 
+        cusView.update(imageName, displayLaSearchResult, displayTaTrolley, displayTaReceipt, username);
     }
-     // extra notes:
+
+    // extra notes:
      //Path.toUri(): Converts a Path object (a file or a directory path) to a URI object.
      //File.toURI(): Converts a File object (a file on the filesystem) to a URI object
 

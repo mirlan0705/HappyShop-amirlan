@@ -35,22 +35,30 @@ public class CustomerController {
         }
 
     }
+
     private void openLoginPopup() {
-        // popup Stage
+
         Stage popup = new Stage();
-        popup.initModality(Modality.APPLICATION_MODAL); // simple modal popup
+
+        popup.initOwner(cusModel.cusView.getStage());
+        popup.initModality(Modality.WINDOW_MODAL);
+        popup.setAlwaysOnTop(true);
 
         LoginView loginView = new LoginView();
         LoginController loginController = new LoginController();
-        LoginModel loginModel = new LoginModel(cusModel.databaseRW); // reuse same DatabaseRW
+        LoginModel loginModel = new LoginModel(cusModel.databaseRW);
+
+        // wire everything
+        loginModel.customerModel = cusModel;   // ✅ this makes "Signed in as" update immediately
+        loginModel.loginView = loginView;
 
         loginView.loginController = loginController;
         loginController.loginModel = loginModel;
-        loginModel.loginView = loginView;
-        loginModel.databaseRW = cusModel.databaseRW;
 
-        loginView.start(popup); // LoginView calls popup.show() internally
+        loginView.start(popup);
     }
+
+
 
 
 }
