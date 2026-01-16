@@ -48,15 +48,11 @@ public class CustomerView  {
     private TextArea taReceipt;//in receipt page
     private Label lbUser;
 
-    // Holds a reference to this CustomerView window for future access and management
-    // (e.g., positioning the removeProductNotifier when needed).
+    // holds a reference to this CustomerView window for future access and management
     private Stage viewWindow;
 
     public Stage getStage() {
         return viewWindow;
-    }
-    public boolean isReady() {
-        return viewWindow != null && lbUser != null;
     }
 
     public void start(Stage window) {
@@ -226,7 +222,6 @@ public class CustomerView  {
             taReceipt.setText(receipt);
         }
     }
-
 
     // Replaces the last child of hbRoot with the specified page.
     // the last child is either vbTrolleyPage or vbReceiptPage.

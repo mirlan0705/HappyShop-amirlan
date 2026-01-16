@@ -22,7 +22,11 @@ import java.util.concurrent.TimeUnit;
  * or create a subclass of CustomerModel and override specific methods where appropriate.
  */
 public class CustomerModel {
+
     private String username = "Guest";
+    public String getUsername() { //testing
+        return username;
+    }
 
     public void setUsername(String username) {
         this.username = username;
@@ -166,7 +170,7 @@ public class CustomerModel {
      * Groups products by their productId to optimize database queries and updates.
      * By grouping products, we can check the stock for a given `productId` once, rather than repeatedly
      */
-    private ArrayList<Product> groupProductsById(ArrayList<Product> proList) {
+    ArrayList<Product> groupProductsById(ArrayList<Product> proList) {
         Map<String, Product> grouped = new HashMap<>();
         for (Product p : proList) {
             String id = p.getProductId();
