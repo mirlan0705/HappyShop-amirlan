@@ -39,7 +39,6 @@ public class CustomerModelTest {
 
         // create model with no searched product. theProduct is null by default
         CustomerModel model = new CustomerModel();
-
         // before: trolley should be empty
         assertTrue(model.getTrolley().isEmpty());
 

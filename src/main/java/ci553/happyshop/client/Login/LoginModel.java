@@ -35,7 +35,6 @@ public class LoginModel {
             return;
         }
 
-        // ✅ SUCCESS
         if (customerModel != null) {
             // popup login
             customerModel.setUsername(email);   // updates label immediately

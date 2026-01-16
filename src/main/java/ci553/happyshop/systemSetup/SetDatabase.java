@@ -88,11 +88,12 @@ public class SetDatabase {
                         "CHECK (inStock >= 0)" +
                         ")",
 
+                //create the tables for login
                 "CREATE TABLE UserData(" +
                         "email VARCHAR(100) PRIMARY KEY," +
                         "password VARCHAR(45)" +
                         ")",
-
+                // default value
                 "INSERT INTO UserData VALUES ('imsid1941@gmail.com', 'thereisalight')",
 
                 // Insert data into ProductTable

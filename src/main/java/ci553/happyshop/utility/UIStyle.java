@@ -29,7 +29,6 @@ package ci553.happyshop.utility;
 
 public final class UIStyle {
 
-    //private constructor prevents instantiation
     private UIStyle() {
         throw new UnsupportedOperationException("UIStyle is a utility class");
     }
@@ -39,11 +38,11 @@ public final class UIStyle {
     public static final int removeProNotifierWinWidth = customerWinWidth / 2 + 160;
     public static final int removeProNotifierWinHeight = 230;
 
-    // ===== Login window size (compact, matches other clients) =====
+    // login window size
     public static final int loginWinWidth = 430;
     public static final int loginWinHeight = 280;
 
-    // ===== Compact Login styles =====
+    // compact login styles
     public static final String loginRootStyle =
             "-fx-background-color: #f5f5f5; -fx-padding: 18px;";
 
